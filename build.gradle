@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+def gdxVersion = '1.12.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "com.badlogicgames.gdx:gdx:${gdxVersion}"
+    implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:${gdxVersion}"
+}
+
+application {
+    mainClass = 'com.demo.rpg.DesktopLauncher'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'core'
+        }
+        resources {
+            srcDir 'core/resources'
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+}
